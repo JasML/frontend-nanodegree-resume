@@ -64,10 +64,24 @@ The International Name challenge in Lesson 2 where you'll create a function that
 */
 $(document).ready(function() {
   $('button').click(function() {
+    var name = $('#name')[0].innerText;
+    console.log(name);
     var iName = inName(name) || function(){};
     $('#name').html(iName);  
   });
 });
+
+function inName(name) {
+  var namesSeparate = name.split(" ");
+
+  // First name will have first letter capitalized and rest of name lower case
+  var newFirst = namesSeparate[0].slice(0,1).toUpperCase() + namesSeparate[0].slice(1).toLowerCase();
+  
+  // Last name will be all upper case
+  var newLast = namesSeparate[1].toUpperCase();
+  iName = newFirst + " " + newLast;
+  return iName
+}
 
 /*
 The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
@@ -233,11 +247,11 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
-  // Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+window.addEventListener('resize', function(e) {
+//  Make sure the map bounds get updated on page resize
+ map.fitBounds(mapBounds);
+});
