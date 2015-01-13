@@ -1,10 +1,7 @@
-
-
-// console.log(header);
-
-// Array of skills
-// var skills = 
-// ["CSS", "HTML", "Version Control"];
+/* 
+	This file creates all of the content for the resume as well as the commands for formatting
+	and displaying the data of the website.
+*/
 
 // Create a bio object
 var bio = {
@@ -18,8 +15,42 @@ var bio = {
 	"pictureURL" : "images/fry.jpg",
 	"welcomeMessage" : "Hello World!",
 	"skills" : [
-		"CSS", "HTML", "JS", "Version Control"]
+		"CSS", "HTML", "JS", "Version Control"],
+	"display" : function() {
+		// Format data
+		var formattedName = HTMLheaderName.replace("%data%",bio.name);
+		var formattedRole = HTMLheaderRole.replace("%data%",bio.role);
+		var formattedEmail = HTMLemail.replace("%data%",bio.contacts.email);
+		var formattedContactGeneric = HTMLcontactGeneric.replace("%data%",bio.contacts.location).replace("%contact%","location");
+		var formattedWelcomeMessage = HTMLWelcomeMsg.replace("%data%",bio.welcomeMessage);
+		var formattedBioPic = HTMLbioPic.replace("%data%",bio.pictureURL);
+		var formattedCell = HTMLmobile.replace("%data%",bio.contacts.mobile);
+		var formattedGithub = HTMLgithub.replace("%data%",bio.contacts.github);
+
+		if (bio.skills.length > 0) {
+			$("#header").append(HTMLskillsStart);
+
+			for (skill in bio.skills) {
+				// Format data
+				var formattedSkill = HTMLskills.replace("%data%",bio.skills[skill]);
+				// Display on resume
+				$("#skills").append(formattedSkill);	
+			}
+		}
+
+		$("#header").prepend(formattedGithub);
+		$("#header").prepend(formattedCell);
+		$("#header").prepend(formattedEmail);
+		$("#header").prepend(formattedContactGeneric);
+		$("#header").prepend(formattedBioPic);
+		$("#header").prepend(formattedWelcomeMessage);
+		$("#header").prepend(formattedRole);
+		$("#header").prepend(formattedName);
+	}
 }
+
+
+
 
 // Create a work object (using JSON)
 var work = {
@@ -58,7 +89,7 @@ var work = {
 	}
 };
 
-work.display();
+
 
 // Create a projects object
 var projects = {
@@ -100,15 +131,15 @@ var projects = {
 	}
 };
 
-projects.display();
-
 // Create an education object (using JSON)
 var education = {
 	"schools" : [
 		{
 			"name" : "Montana Tech of the University of Montana",
 			"location" : "Butte, MT",
-			"degree" : "BS",
+			"degrees" : [
+				"BS"
+				],
 			"majors" : [
 				"General Engineering"
 				],
@@ -118,7 +149,8 @@ var education = {
 		{
 			"name" : "Washington State University",
 			"location" : "Pullman, WA",
-			"degree" : "MS",
+			"degrees" : [
+				"MS"],
 			"majors" : [
 				"Electrical Engineering"
 				],
@@ -139,39 +171,41 @@ var education = {
 			"url" : "www.udacity.com",
 			"title" : "How to Use Git and GitHub"
 		}
-	]
+	],
+	"displaySchools" : function() {
+		for (school in education.schools) {
+			// Place header for education section
+			$("#education").append(HTMLschoolStart);
+			// Format data
+			var formattedSchoolName = HTMLschoolName.replace("%data%",education.schools[school].name);
+			var formattedSchoolDates = HTMLschoolDates.replace("%data%",education.schools[school].dates);
+			var formattedSchoolLocation = HTMLschoolLocation.replace("%data%",education.schools[school].location);
+			// Display on resume
+			$(".education-entry:last").append(formattedSchoolName);
+			$(".education-entry:last").append(formattedSchoolDates);
+			$(".education-entry:last").append(formattedSchoolLocation);
+			// Assume number of majors matches number of degrees
+			for (major in education.schools[school].majors) {
+				var formattedSchoolMajor = HTMLschoolMajor.replace("%data%",education.schools[school].majors[major]);
+				var formattedSchoolDegree = HTMLschoolDegree.replace("%data%",education.schools[school].degrees[major]);
+				$(".education-entry:last").append(formattedSchoolMajor);
+				$(".education-entry:last").append(formattedSchoolDegree);
+			}
+			
+		}
+	},
+	"displayOnlineCourses" : function() {
+		console.log("Start Here");
+	}
 };
 
-// Format name
-var formattedName = HTMLheaderName.replace("%data%",bio.name);
 
-// Format role (position being sought)
-var formattedRole = HTMLheaderRole.replace("%data%",bio.role);
-
-// Format email
-var formattedEmail = HTMLemail.replace("%data%",bio.contacts.email);
-
-// Format address
-var formattedContactGeneric = HTMLcontactGeneric.replace("%data%",bio.contacts.location).replace("%contact%","location");
-
-// Format welcome message
-var formattedWelcomeMessage = HTMLWelcomeMsg.replace("%data%",bio.welcomeMessage);
-
-// Format bio pic
-var formattedBioPic = HTMLbioPic.replace("%data%",bio.pictureURL);
-
-// skills
-if (bio.skills.length > 0) {
-	$("#header").append(HTMLskillsStart);
-
-	for (skill in bio.skills) {
-		// Format data
-		var formattedSkill = HTMLskills.replace("%data%",bio.skills[skill]);
-		// Display on resume
-		$("#skills").append(formattedSkill);	
-	}
-}
-
+// Run the display functions for all of the objects created above
+bio.display();
+work.display();
+projects.display();
+education.displaySchools();
+education.displayOnlineCourses();
 
 // Internationalize button
 $("#main").append(internationalizeButton);
@@ -184,25 +218,20 @@ $(document).click(function(loc) {
   logClicks(x,y);
 });
 
-// Format cell phone number
-var formattedCell = HTMLmobile.replace("%data%",bio.contacts.mobile);
-
-// Format gitHub link
-var formattedGithub = HTMLgithub.replace("%data%",bio.contacts.github);
 
 
 // Add name and role to header element
 // if (bio.skills.length > 0) {
 // 	$("#header").prepend(formattedSkills);
 // }
-$("#header").prepend(formattedGithub);
-$("#header").prepend(formattedCell);
-$("#header").prepend(formattedEmail);
-$("#header").prepend(formattedContactGeneric);
-$("#header").prepend(formattedBioPic);
-$("#header").prepend(formattedWelcomeMessage);
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
+// $("#header").prepend(formattedGithub);
+// $("#header").prepend(formattedCell);
+// $("#header").prepend(formattedEmail);
+// $("#header").prepend(formattedContactGeneric);
+// $("#header").prepend(formattedBioPic);
+// $("#header").prepend(formattedWelcomeMessage);
+// $("#header").prepend(formattedRole);
+// $("#header").prepend(formattedName);
 
 // Add a Google map with all the places I've lived and Worked
 $('#mapDiv').append(googleMap);
