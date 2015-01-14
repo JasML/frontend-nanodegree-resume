@@ -161,20 +161,26 @@ var education = {
 	"onlineCourses" : [
 		{
 			"school" : "Udacity",
-			"dates" : "Nov 2014-Present",
+			"dates" : "2015",
 			"url" : "www.udacity.com",
 			"title" : "Intro to HTML and CSS"
 		},
 		{
 			"school" : "Udacity",
-			"dates" : "Nov 2014-Present",
+			"dates" : "2014",
 			"url" : "www.udacity.com",
 			"title" : "How to Use Git and GitHub"
+		},
+		{
+			"school" : "Udacity",
+			"dates" : "Current",
+			"url" : "www.udacity.com",
+			"title" : "JavaScript Basics"
 		}
 	],
 	"displaySchools" : function() {
 		for (school in education.schools) {
-			// Place header for education section
+			// Start a new education entry div
 			$("#education").append(HTMLschoolStart);
 			// Format data
 			var formattedSchoolName = HTMLschoolName.replace("%data%",education.schools[school].name);
@@ -195,7 +201,24 @@ var education = {
 		}
 	},
 	"displayOnlineCourses" : function() {
-		console.log("Start Here");
+		// Place header for online courses
+		$("#education").append(HTMLonlineClasses);
+		for (course in education.onlineCourses) {
+			// Start a new education entry div
+			$("#education").append(HTMLschoolStart);
+			// Format data
+			var formattedOnlineTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[course].title);
+			var formattedOnlineSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[course].school);
+			var formattedOnlineDates = HTMLonlineDates.replace("%data%",education.onlineCourses[course].dates);
+			var formattedOnlineUrl = HTMLonlineURL.replace("%data%",education.onlineCourses[course].url);
+			// Display on resume
+			
+			$(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
+			$(".education-entry:last").append(formattedOnlineDates);
+			$(".education-entry:last").append(formattedOnlineUrl);
+			
+
+		}
 	}
 };
 
@@ -208,30 +231,15 @@ education.displaySchools();
 education.displayOnlineCourses();
 
 // Internationalize button
-$("#main").append(internationalizeButton);
+// $("#main").append(internationalizeButton);
 
 // Log clock locations on resume
-$(document).click(function(loc) {
-  var x = loc.pageX;
-  var y = loc.pageY;
+// $(document).click(function(loc) {
+//   var x = loc.pageX;
+//   var y = loc.pageY;
 
-  logClicks(x,y);
-});
-
-
-
-// Add name and role to header element
-// if (bio.skills.length > 0) {
-// 	$("#header").prepend(formattedSkills);
-// }
-// $("#header").prepend(formattedGithub);
-// $("#header").prepend(formattedCell);
-// $("#header").prepend(formattedEmail);
-// $("#header").prepend(formattedContactGeneric);
-// $("#header").prepend(formattedBioPic);
-// $("#header").prepend(formattedWelcomeMessage);
-// $("#header").prepend(formattedRole);
-// $("#header").prepend(formattedName);
+//   logClicks(x,y);
+// });
 
 // Add a Google map with all the places I've lived and Worked
 $('#mapDiv').append(googleMap);
