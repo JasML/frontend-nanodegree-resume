@@ -8,14 +8,16 @@ var bio = {
 	"name" : "Jasmine Minteer-Levine",
 	"role" : "Web Developer",
 	"contacts" : {
-		"location" : "Clinton, WA",
+		"mobile" : "555-555-5555",
 		"email" : "jasbethml@gmail.com",
-		"github" : "JasML"
+		"github" : "JasML",
+		"twitter" : "",
+		"location" : "Clinton, WA"
 	},
-	"pictureURL" : "images/fry.jpg",
 	"welcomeMessage" : "Hello World!",
 	"skills" : [
 		"CSS", "HTML", "JS", "Version Control"],
+		"biopic" : "images/fry.jpg",
 	"display" : function() {
 		// Format data
 		var formattedName = HTMLheaderName.replace("%data%",bio.name);
@@ -23,14 +25,14 @@ var bio = {
 		var formattedEmail = HTMLemail.replace("%data%",bio.contacts.email);
 		var formattedContactGeneric = HTMLcontactGeneric.replace("%data%",bio.contacts.location).replace("%contact%","location");
 		var formattedWelcomeMessage = HTMLWelcomeMsg.replace("%data%",bio.welcomeMessage);
-		var formattedBioPic = HTMLbioPic.replace("%data%",bio.pictureURL);
+		var formattedBioPic = HTMLbioPic.replace("%data%",bio.biopic);
 		var formattedCell = HTMLmobile.replace("%data%",bio.contacts.mobile);
 		var formattedGithub = HTMLgithub.replace("%data%",bio.contacts.github);
 
 		if (bio.skills.length > 0) {
 			$("#header").append(HTMLskillsStart);
 
-			for (skill in bio.skills) {
+			for (var skill in bio.skills) {
 				// Format data
 				var formattedSkill = HTMLskills.replace("%data%",bio.skills[skill]);
 				// Display on resume
@@ -47,10 +49,95 @@ var bio = {
 		$("#header").prepend(formattedRole);
 		$("#header").prepend(formattedName);
 	}
-}
+};
 
+// Create an education object (using JSON)
+var education = {
+	"schools" : [
+		{
+			"name" : "Montana Tech of the University of Montana",
+			"location" : "Butte, MT",
+			"degree" : "BS",
+			"majors" : [
+				"General Engineering"
+				],
+			"dates" : "2002",
+			"website" : "www.mtech.edu"
+		},
+		{
+			"name" : "Washington State University",
+			"location" : "Pullman, WA",
+			"degree" : "MS",
+			"majors" : [
+				"Electrical Engineering"
+				],
+			"dates" : "2005",
+			"website" : "www.wsu.edu"
+		}
+	],
+	"onlineCourses" : [
+		{
+			"title" : "Intro to HTML and CSS",
+			"school" : "Udacity",
+			"date" : "2015",
+			"url" : "www.udacity.com"
+		},
+		{
+			"title" : "How to Use Git and GitHub",
+			"school" : "Udacity",
+			"date" : "2014",
+			"url" : "www.udacity.com"
+		},
+		{
+			"title" : "JavaScript Basics",
+			"school" : "Udacity",
+			"date" : "Current",
+			"url" : "www.udacity.com"
+		}
+	],
+	"displaySchools" : function() {
+		for (var school in education.schools) {
+			// Start a new education entry div
+			$("#education").append(HTMLschoolStart);
+			// Format data
+			var formattedSchoolName = HTMLschoolName.replace("%data%",education.schools[school].name);
+			var formattedSchoolDates = HTMLschoolDates.replace("%data%",education.schools[school].dates);
+			var formattedSchoolLocation = HTMLschoolLocation.replace("%data%",education.schools[school].location);
+			// Display on resume
+			$(".education-entry:last").append(formattedSchoolName);
+			$(".education-entry:last").append(formattedSchoolDates);
+			$(".education-entry:last").append(formattedSchoolLocation);
+			// Assume same major applies to all degrees 
+			for (var major in education.schools[school].majors) {
+				var formattedSchoolMajor = HTMLschoolMajor.replace("%data%",education.schools[school].majors[major]);
+				var formattedSchoolDegree = HTMLschoolDegree.replace("%data%",education.schools[school].degree);
+				$(".education-entry:last").append(formattedSchoolMajor);
+				$(".education-entry:last").append(formattedSchoolDegree);
+			}
+			
+		}
+	},
+	"displayOnlineCourses" : function() {
+		// Place header for online courses
+		$("#education").append(HTMLonlineClasses);
+		for (var course in education.onlineCourses) {
+			// Start a new education entry div
+			$("#education").append(HTMLschoolStart);
+			// Format data
+			var formattedOnlineTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[course].title);
+			var formattedOnlineSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[course].school);
+			var formattedOnlineDates = HTMLonlineDates.replace("%data%",education.onlineCourses[course].date);
+			var formattedOnlineUrl = HTMLonlineURL.replace("%data%",education.onlineCourses[course].url);
+			// Display on resume
+			
+			$(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
+			$(".education-entry:last").append(formattedOnlineDates);
+			$(".education-entry:last").append(formattedOnlineUrl);
+			
 
-
+		}
+	}
+};
 
 // Create a work object (using JSON)
 var work = {
@@ -71,7 +158,7 @@ var work = {
 		}
 	],
 	"display" : function() {
-		for (job in work.jobs) {
+		for (var job in work.jobs) {
 			// Place Header for work experience section
 			$("#workExperience").append(HTMLworkStart);
 			// Format data
@@ -93,7 +180,7 @@ var work = {
 
 // Create a projects object
 var projects = {
-	"project" : [
+	"projects" : [
 		{
 			"title" : "Project1",
 			"dates" : "Dec 2014",
@@ -114,110 +201,19 @@ var projects = {
 		}
 	],
 	"display" : function() {
-		for (project in projects.project) {
+		for (var project in projects.projects) {
 			// Place Header for work experience section
 			$("#projects").append(HTMLprojectStart);
 			// Format data
-			var formattedTitle = HTMLprojectTitle.replace("%data%",projects.project[project].title);
-			var formattedDates = HTMLprojectDates.replace("%data%",projects.project[project].dates);
-			var formattedDescription = HTMLprojectDescription.replace("%data%",projects.project[project].description);
-			var formattedImages = HTMLprojectImage.replace("%data%",projects.project[project].images);
+			var formattedTitle = HTMLprojectTitle.replace("%data%",projects.projects[project].title);
+			var formattedDates = HTMLprojectDates.replace("%data%",projects.projects[project].dates);
+			var formattedDescription = HTMLprojectDescription.replace("%data%",projects.projects[project].description);
+			var formattedImages = HTMLprojectImage.replace("%data%",projects.projects[project].images);
 			// Display on resume
 			$(".project-entry:last").append(formattedTitle);
 			$(".project-entry:last").append(formattedDates);
 			$(".project-entry:last").append(formattedDescription);
 			$(".project-entry:last").append(formattedImages);
-		}
-	}
-};
-
-// Create an education object (using JSON)
-var education = {
-	"schools" : [
-		{
-			"name" : "Montana Tech of the University of Montana",
-			"location" : "Butte, MT",
-			"degrees" : [
-				"BS"
-				],
-			"majors" : [
-				"General Engineering"
-				],
-			"dates" : "1998-2002",
-			"website" : "www.mtech.edu"
-		},
-		{
-			"name" : "Washington State University",
-			"location" : "Pullman, WA",
-			"degrees" : [
-				"MS"],
-			"majors" : [
-				"Electrical Engineering"
-				],
-			"dates" : "2003-2005",
-			"website" : "www.wsu.edu"
-		}
-	],
-	"onlineCourses" : [
-		{
-			"school" : "Udacity",
-			"dates" : "2015",
-			"url" : "www.udacity.com",
-			"title" : "Intro to HTML and CSS"
-		},
-		{
-			"school" : "Udacity",
-			"dates" : "2014",
-			"url" : "www.udacity.com",
-			"title" : "How to Use Git and GitHub"
-		},
-		{
-			"school" : "Udacity",
-			"dates" : "Current",
-			"url" : "www.udacity.com",
-			"title" : "JavaScript Basics"
-		}
-	],
-	"displaySchools" : function() {
-		for (school in education.schools) {
-			// Start a new education entry div
-			$("#education").append(HTMLschoolStart);
-			// Format data
-			var formattedSchoolName = HTMLschoolName.replace("%data%",education.schools[school].name);
-			var formattedSchoolDates = HTMLschoolDates.replace("%data%",education.schools[school].dates);
-			var formattedSchoolLocation = HTMLschoolLocation.replace("%data%",education.schools[school].location);
-			// Display on resume
-			$(".education-entry:last").append(formattedSchoolName);
-			$(".education-entry:last").append(formattedSchoolDates);
-			$(".education-entry:last").append(formattedSchoolLocation);
-			// Assume number of majors matches number of degrees
-			for (major in education.schools[school].majors) {
-				var formattedSchoolMajor = HTMLschoolMajor.replace("%data%",education.schools[school].majors[major]);
-				var formattedSchoolDegree = HTMLschoolDegree.replace("%data%",education.schools[school].degrees[major]);
-				$(".education-entry:last").append(formattedSchoolMajor);
-				$(".education-entry:last").append(formattedSchoolDegree);
-			}
-			
-		}
-	},
-	"displayOnlineCourses" : function() {
-		// Place header for online courses
-		$("#education").append(HTMLonlineClasses);
-		for (course in education.onlineCourses) {
-			// Start a new education entry div
-			$("#education").append(HTMLschoolStart);
-			// Format data
-			var formattedOnlineTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[course].title);
-			var formattedOnlineSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[course].school);
-			var formattedOnlineDates = HTMLonlineDates.replace("%data%",education.onlineCourses[course].dates);
-			var formattedOnlineUrl = HTMLonlineURL.replace("%data%",education.onlineCourses[course].url);
-			// Display on resume
-			
-			$(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
-			$(".education-entry:last").append(formattedOnlineDates);
-			$(".education-entry:last").append(formattedOnlineUrl);
-			
-
 		}
 	}
 };

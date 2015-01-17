@@ -139,6 +139,11 @@ ul {
   list-style-type: none;
 }
 
+.info-window-txt {
+  font-size: 12px;
+  color: blue;
+}
+
 .biopic {
   float: left;
   padding: 10px;

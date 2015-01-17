@@ -57,6 +57,7 @@ var HTMLonlineURL = '<br><a href="#">%data%</a>';
 
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
+var HTMLinfoWindowName = '<div class="info-window-txt">%data%</div>';
 
 
 /*
@@ -99,7 +100,8 @@ function logClicks(x,y) {
 }
 
 $(document).click(function(loc) {
-  // your code goes here!
+  // Call function to display X, Y locaiton on map
+  logClicks(loc.pageX,loc.pageY);
 });
 
 
@@ -167,6 +169,8 @@ function initializeMap() {
     var lon = placeData.geometry.location.lng();  // longitude from the place service
     var name = placeData.formatted_address;   // name of the place from the place service
     var bounds = window.mapBounds;            // current boundaries of the map window
+    var formattedInfoWindowName = HTMLinfoWindowName.replace("%data%",name);
+    console.log(formattedInfoWindowName);
 
     // marker is an object with additional data about the pin for a single location
     var marker = new google.maps.Marker({
@@ -179,12 +183,13 @@ function initializeMap() {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: formattedInfoWindowName
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
+      // When a user clicks on a marker, open an info window with the location name
+      infoWindow.open(map,marker);
     });
 
     // this is where the pin actually gets added to the map.
