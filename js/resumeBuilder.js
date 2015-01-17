@@ -29,25 +29,61 @@ var bio = {
 		var formattedCell = HTMLmobile.replace("%data%",bio.contacts.mobile);
 		var formattedGithub = HTMLgithub.replace("%data%",bio.contacts.github);
 
-		if (bio.skills.length > 0) {
-			$("#header").append(HTMLskillsStart);
-
-			for (var skill in bio.skills) {
-				// Format data
-				var formattedSkill = HTMLskills.replace("%data%",bio.skills[skill]);
-				// Display on resume
-				$("#skills").append(formattedSkill);	
-			}
-		}
-
-		$("#header").prepend(formattedGithub);
-		$("#header").prepend(formattedCell);
-		$("#header").prepend(formattedEmail);
-		$("#header").prepend(formattedContactGeneric);
-		$("#header").prepend(formattedBioPic);
-		$("#header").prepend(formattedWelcomeMessage);
+		// Name and Role
 		$("#header").prepend(formattedRole);
 		$("#header").prepend(formattedName);
+
+		// Top Contacts
+		$("#topContacts").append(formattedCell);
+		$("#topContacts").append(formattedEmail);
+		$("#topContacts").append(formattedGithub);
+		$("#topContacts").append(formattedContactGeneric);
+
+		// Picture
+		$("#header").append(formattedBioPic);
+
+		// Welcome Message
+		$("#header").append(formattedWelcomeMessage);
+
+		// Skills
+		// TODO: fix so that skills appear as a list, not on single line
+		$("#header").append(HTMLskillsStart);
+		for (var skill in bio.skills)	{
+			// Format data
+			var formattedSkill = HTMLskills.replace("%data%",bio.skills[skill]);
+			// Display on resume
+			$("#skills").append(formattedSkill);
+		}
+
+		// Repeat contact info on the bottom of the page
+		$("#footerContacts").append(formattedCell);
+		$("#footerContacts").append(formattedEmail);
+		$("#footerContacts").append(formattedGithub);
+		$("#footerContacts").append(formattedContactGeneric);
+
+
+
+		// if (bio.skills.length > 0) {
+		// 	$("#header").append(HTMLskillsStart);
+
+		// 	for (var skill in bio.skills) {
+		// 		// Format data
+		// 		var formattedSkill = HTMLskills.replace("%data%",bio.skills[skill]);
+		// 		// Display on resume
+		// 		$("#skills").append(formattedSkill);	
+		// 	}
+		// }
+
+		// $("#header").prepend(formattedGithub);
+		// $("#header").prepend(formattedCell);
+		// $("#header").prepend(formattedEmail);
+		// $("#header").prepend(formattedContactGeneric);
+		// $("#header").prepend(formattedBioPic);
+		// $("#header").prepend(formattedWelcomeMessage);
+		// $("#header").prepend(formattedRole);
+		// $("#header").prepend(formattedName);
+
+
 	}
 };
 

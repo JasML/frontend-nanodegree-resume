@@ -114,9 +114,7 @@ https://developers.google.com/maps/documentation/javascript/reference
 var map;    // declares a global map variable
 
 
-/*
-Start here! initializeMap() is called when page is loaded.
-*/
+// TODO:  add more info to the markers
 function initializeMap() {
 
   var locations;
