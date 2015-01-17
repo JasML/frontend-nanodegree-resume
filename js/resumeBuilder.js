@@ -6,17 +6,17 @@
 // Create a bio object
 var bio = {
 	"name" : "Jasmine Minteer-Levine",
-	"role" : "Web Developer",
+	"role" : "Front-End Ninja in Training",
 	"contacts" : {
 		"mobile" : "555-555-5555",
 		"email" : "jasbethml@gmail.com",
 		"github" : "JasML",
-		"twitter" : "",
+		"twitter" : "@iDontTweet",
 		"location" : "Clinton, WA"
 	},
 	"welcomeMessage" : "Hello World!",
 	"skills" : [
-		"CSS", "HTML", "JS", "Version Control"],
+		"CSS", "HTML", "JavaScript", "Git and GitHub"],
 		"biopic" : "images/fry.jpg",
 	"display" : function() {
 		// Format data
@@ -28,6 +28,8 @@ var bio = {
 		var formattedBioPic = HTMLbioPic.replace("%data%",bio.biopic);
 		var formattedCell = HTMLmobile.replace("%data%",bio.contacts.mobile);
 		var formattedGithub = HTMLgithub.replace("%data%",bio.contacts.github);
+		var formattedTwitter = HTMLtwitter.replace("%data%",bio.contacts.twitter);
+		
 
 		// Name and Role
 		$("#header").prepend(formattedRole);
@@ -37,6 +39,7 @@ var bio = {
 		$("#topContacts").append(formattedCell);
 		$("#topContacts").append(formattedEmail);
 		$("#topContacts").append(formattedGithub);
+		$("#topContacts").append(formattedTwitter);
 		$("#topContacts").append(formattedContactGeneric);
 
 		// Picture
@@ -52,37 +55,16 @@ var bio = {
 			// Format data
 			var formattedSkill = HTMLskills.replace("%data%",bio.skills[skill]);
 			// Display on resume
-			$("#skills").append(formattedSkill);
+			// $("#skills").append(formattedSkill);
+			$("#header").append(formattedSkill);
 		}
 
 		// Repeat contact info on the bottom of the page
 		$("#footerContacts").append(formattedCell);
 		$("#footerContacts").append(formattedEmail);
 		$("#footerContacts").append(formattedGithub);
+		$("#footerContacts").append(formattedTwitter);
 		$("#footerContacts").append(formattedContactGeneric);
-
-
-
-		// if (bio.skills.length > 0) {
-		// 	$("#header").append(HTMLskillsStart);
-
-		// 	for (var skill in bio.skills) {
-		// 		// Format data
-		// 		var formattedSkill = HTMLskills.replace("%data%",bio.skills[skill]);
-		// 		// Display on resume
-		// 		$("#skills").append(formattedSkill);	
-		// 	}
-		// }
-
-		// $("#header").prepend(formattedGithub);
-		// $("#header").prepend(formattedCell);
-		// $("#header").prepend(formattedEmail);
-		// $("#header").prepend(formattedContactGeneric);
-		// $("#header").prepend(formattedBioPic);
-		// $("#header").prepend(formattedWelcomeMessage);
-		// $("#header").prepend(formattedRole);
-		// $("#header").prepend(formattedName);
-
 
 	}
 };
@@ -220,20 +202,14 @@ var projects = {
 		{
 			"title" : "Project1",
 			"dates" : "Dec 2014",
-			"description" : "Udacity Mug",
-			"images" : "images/bio.jpg"
+			"description" : "Here is the description of my first fake sample project.",
+			"images" : "images/287.jpg"
 		},
 		{
 			"title" : "Project2",
 			"dates" : "Jan 2015",
-			"description" : "TBD",
-			"images" : "images/197x148.gif"
-		},
-		{
-			"title" : "Project3",
-			"dates" : "Jan 2015",
-			"description" : "TBD",
-			"images" : "images/bio.jpg"
+			"description" : "Here is the description of my second fake sample project.",
+			"images" : "images/286.jpg"
 		}
 	],
 	"display" : function() {
