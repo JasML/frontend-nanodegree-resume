@@ -24,6 +24,9 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   <!-- Load the page styles. -->
   <link href="css/style.css" rel="stylesheet" type="text/css">
 
+  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+
   <!--
   jQuery is a common JavaScript library for reading and making changes to the
   Document Object Model (DOM). The DOM is a tree that contains information
@@ -63,20 +66,20 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
       <ul id="topContacts" class='flex-box'></ul>
     </div>
     <div style='clear: both;'></div>
-    <div id="workExperience" class='gray'>
+    <div id="workExperience" class='work-background'>
       <h2>Work Experience</h2>
     </div>
-    <div id="projects">
+    <div id="projects" class="projects-background">
       <h2>Projects</h2>
     </div>
-    <div id="education" class='gray'>
-      <h2>Education</h2>
+    <div id="education" class="education-background">
+      <h2 class="education-hdr-text">Education</h2>
     </div>
-    <div id="mapDiv">
+    <div id="mapDiv" class="mapdiv-background">
       <h2>Where I've Lived and Worked</h2>
     </div>
-    <div id="letsConnect" class='dark-gray'>
-      <h2 class='orange center-text'>Let's Connect</h2>
+    <div id="letsConnect">
+      <h2 class='connect-background center-text'>Let's Connect</h2>
         <ul id="footerContacts" class="flex-box">
       </ul>
     </div>
@@ -137,7 +140,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     if(document.getElementsByClassName('flex-item').length === 0) {
       document.getElementById('topContacts').style.backgroundColor = 'black';
     }
-    
+
     if(document.getElementsByTagName('h1').length === 0) {
       document.getElementById('header').style.backgroundColor = 'black';
     }

@@ -200,13 +200,13 @@ var work = {
 var projects = {
 	"projects" : [
 		{
-			"title" : "Project1",
+			"title" : "Uber Awesome Project 1",
 			"dates" : "Dec 2014",
 			"description" : "Here is the description of my first fake sample project.",
 			"images" : "images/287.jpg"
 		},
 		{
-			"title" : "Project2",
+			"title" : "Even Better Project 2",
 			"dates" : "Jan 2015",
 			"description" : "Here is the description of my second fake sample project.",
 			"images" : "images/286.jpg"
