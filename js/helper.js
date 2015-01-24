@@ -136,23 +136,28 @@ function initializeMap() {
 
     // initializes an empty array
     var locations = [];
+    var locationsInfo = [];
 
     // adds the single location property from bio to the locations array
     locations.push(bio.contacts.location);
+    locationsInfo.push("My Home Town");
 
     // iterates through school locations and appends each location to
     // the locations array
     for (var school in education.schools) {
       locations.push(education.schools[school].location);
+      locationsInfo.push(education.schools[school].name);
     }
 
     // iterates through work locations and appends each location to
     // the locations array
     for (var job in work.jobs) {
       locations.push(work.jobs[job].location);
+      locationsInfo.push(work.jobs[job].employer);
     }
 
     return locations;
+    return locationsInfo;
   }
 
   /*
@@ -168,7 +173,7 @@ function initializeMap() {
     var name = placeData.formatted_address;   // name of the place from the place service
     var bounds = window.mapBounds;            // current boundaries of the map window
     var formattedInfoWindowName = HTMLinfoWindowName.replace("%data%",name);
-    console.log(formattedInfoWindowName);
+    var formattedMoreInfoWindowName = HTMLinfoWindowName.replace("%data%","Somewhere I've Lived or Worked");
 
     // marker is an object with additional data about the pin for a single location
     var marker = new google.maps.Marker({
@@ -184,10 +189,29 @@ function initializeMap() {
       content: formattedInfoWindowName
     });
 
+    var moreInfoWindow = new google.maps.InfoWindow({
+      content: formattedMoreInfoWindowName
+    });
+
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
+      //If an info window is already open, close it and open a new one
+      if (moreInfoWindow.getMap()) {
+        moreInfoWindow.close();
+      }
+
       // When a user clicks on a marker, open an info window with the location name
       infoWindow.open(map,marker);
+    });
+
+    // Add info when marker is right-clicked
+    google.maps.event.addListener(marker, 'rightclick', function() {
+      // When a user right-clicks on a marker, close it and open a new one
+      if (infoWindow.getMap()) {
+        infoWindow.close();
+      }
+
+      moreInfoWindow.open(map,marker);
     });
 
     // this is where the pin actually gets added to the map.

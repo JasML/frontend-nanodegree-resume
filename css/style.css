@@ -38,7 +38,7 @@ h3 {
 h4 {
   font-weight: bold;
   font-size: 14px;
-  color: #4A4A4A;
+  color: #4a4a4a;
   line-height: 17px;
 }
 
@@ -55,7 +55,7 @@ p {
 }
 
 a {
-  color: #202A2D;
+  color: #202a2d;
   text-decoration: none;
   margin-top: 10px;
   display: block;
@@ -194,7 +194,7 @@ img {
 /* Bar chart stuff */
 .chart div {
   font: 10px sans-serif;
-  background-color: #4A4A4A;
+  background-color: #4a4a4a;
   text-align: right;
   padding: 3px;
   margin: 1px;
@@ -233,7 +233,7 @@ span {
   }
   .welcome-message {
     display: none;
-    color: #EDD9B6;
+    color: #edd9b6;
   }
 }
 

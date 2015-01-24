@@ -1,0 +1,11 @@
+For this project, I used a lot of online resources, including:
+
+- Forums on Piazza
+- HTML validator (validator.w3.org)
+- CSS validator (jigsaw.w3.org/css-validator)
+- Udacity style guide (http://udacity.github.io/frontend-nanodegree-styleguide/)
+- Google Maps API documentation
+- Google (a lot of Google), which often directed me to one of the following:
+-- http://www.w3schools.com/css
+-- stackoverflow.com
+- A wide variety of online resumes to get ideas for styles
